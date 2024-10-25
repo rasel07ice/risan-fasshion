@@ -5,7 +5,6 @@ import {
   MdOutlineShoppingCartCheckout,
 } from "react-icons/md";
 import { TiShoppingCart, TiThMenu } from "react-icons/ti";
-import { useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "../../context/AuthProvider";

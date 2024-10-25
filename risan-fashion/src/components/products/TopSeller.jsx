@@ -16,7 +16,12 @@ const TopSeller = () => {
   useEffect(() => {
     const getAllFurnitures = async () => {
       const allFurnitures = await getAllProducts();
-      if (allFurnitures.products) setFurnitures(allFurnitures.products);
+      if (allFurnitures.products) {
+        const topSellFurniture = allFurnitures.products.filter(
+          (item) => item.trending === true
+        );
+        setFurnitures(topSellFurniture);
+      }
     };
     getAllFurnitures();
   }, []);

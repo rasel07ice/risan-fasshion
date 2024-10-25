@@ -4,7 +4,7 @@ import ShopByCategory from "@/components/category/ShopByCategory";
 import AddProduct from "@/components/dashboard/AddProduct";
 import Features from "@/components/feature/Features";
 
-import TopSeller from "@/components/topSeller/TopSeller";
+import TopSeller from "@/components/products/TopSeller";
 
 const Home = () => {
   return (
