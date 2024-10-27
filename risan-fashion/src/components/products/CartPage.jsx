@@ -90,70 +90,7 @@ const CartPage = () => {
           </tr>
         </tfoot>
       </table>
-<<<<<<< HEAD
-      <div className="flex justify-end">
-        <button
-          className="px-3 py-2 bg-secondary rounded-md text-white"
-          type="button"
-          onClick={() => document.getElementById("order_modal").showModal()}
-        >
-          {" "}
-          Buy Now
-        </button>
-      </div>
-      <dialog id="order_modal" className="modal">
-        <div className="modal-box max-w-none w-3/6">
-          <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-secondary">
-              ✕
-            </button>
-          </form>
-          <div className="p-4">
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th>Customer Name</th>
-                  <th>Email</th>
-                  <th>Number of Products</th>
-                  <th>Total Price</th>
-                  <th>Adress</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* row 1 */}
 
-                <tr>
-                  <td>{user?.name}</td>
-                  <td>{user?.email}</td>
-                  <td>{cartItems.length}</td>
-                  <td>{totalPrice}</td>
-                  <td>
-                    <input
-                      type="text"
-                      name="address"
-                      placeholder="enter address"
-                      id="address"
-                    />
-                  </td>
-                  <th className="space-x-1">
-                    <Link
-                      className="btn btn-ghost btn-xs bg-primary"
-                      onClick={handlePurchase}
-                    >
-                      Purchase
-                    </Link>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </dialog>
-=======
->>>>>>> parent of f912efe (last commit)
     </div>
   );
 };
