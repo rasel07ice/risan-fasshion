@@ -76,6 +76,58 @@ const CartPage = () => {
           </tr>
         </tfoot>
       </table>
+      <div>
+        <button
+          className="px-3 py-2 bg-primary"
+          type="button"
+          onClick={() => document.getElementById("order_modal").showModal()}
+        >
+          {" "}
+          Buy Now
+        </button>
+      </div>
+      <dialog id="order_modal" className="modal">
+        <div className="modal-box max-w-none w-3/6">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-secondary">
+              ✕
+            </button>
+          </form>
+          <div className="p-4">
+          <table className="table">
+        {/* head */}
+        <thead>
+          <tr>
+            <th>
+              <label>
+                <input type="checkbox" className="checkbox" />
+              </label>
+            </th>
+            <th>Customer Name</th>
+            <th>Email</th>
+            <th>Number of Products</th>
+            <th>Total Price</th>
+            <th>Adress</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {/* row 1 */}
+
+            <tr >
+              <td>
+              </td>
+              <td>{item?.category}</td>
+              <td>{item?.newPrice}</td>
+            </tr>
+
+        </tbody>
+
+      </table>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

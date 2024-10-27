@@ -17,7 +17,7 @@ const FurnitureCard = ({ furniture }) => {
           alt="blog"
         />
         <div className="p-6 text-left">
-          <Link to={`products/${furniture._id}`}>
+          <Link to={`/products/${furniture._id}`}>
             <h2 className="text-xl font-semibold text-secondary">
               {furniture?.title.length > 25
                 ? `${furniture?.title.slice(0, 25)} .....`

@@ -35,7 +35,7 @@ const TopSeller = () => {
           View All
         </span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-2">
         {furnitures?.map((item) => (
           <FurnitureCard key={item._id} furniture={item} />
         ))}

@@ -198,7 +198,7 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link className="justify-between" to="/">
+                    <Link className="justify-between" to="/cart">
                       Cart Pages
                       <span className="badge">
                         <TiShoppingCart className="text-primary" />
