@@ -1,11 +1,12 @@
+import axiosInstance from "@/services/api";
 import { GoogleAuthProvider } from "firebase/auth";
 import { useForm } from "react-hook-form";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "../../context/AuthProvider";
 
 const Login = () => {
-  const { signIn, loginWithGmail } = useAuth();
+  const { setUser, signIn, loginWithGmail } = useAuth();
   const googleAuthProvider = new GoogleAuthProvider();
   const {
     register,
@@ -13,10 +14,19 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     console.log(data);
     signIn(data.email, data.password).then((result) => {
-      console.log(result.user);
+      console.log("email:", result);
+      axiosInstance.get(`users/user/${result.user.email}`).then((res) => {
+        const retriveduser = res.data.user;
+        console.log(retriveduser.role);
+        if (retriveduser.role === "admin") {
+          navigate("/dashboard");
+        }
+      });
       toast.success("Login Status", {
         description: "User Login Successful!",
         action: {
@@ -24,6 +34,7 @@ const Login = () => {
           onClick: () => console.log("Undo"),
         },
       });
+      navigate("/");
     });
   };
 
@@ -62,7 +73,7 @@ const Login = () => {
             onClick: () => console.log("Undo"),
           },
         });
-        Navigate("/");
+        navigate("/");
       })
       .catch((error) => {
         toast.error("Login Status", {
@@ -76,11 +87,14 @@ const Login = () => {
   };
 
   return (
-    <div className="text-gray-900 flex justify-center">
+    <div className="text-gray-900 flex justify-center mt-6">
       <div className="max-w-6xl bg-white shadow sm:rounded-lg flex justify-center flex-1">
         <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
           <div>
-            <img src="./user.png" className="w-32 mx-auto" />
+            <img
+              src="https://img.freepik.com/premium-vector/gray-user-icon-inside-circular-frame-simple-head-shoulders-silhouette-representsa_213497-5015.jpg?semt=ais_hybrid"
+              className="w-32 mx-auto"
+            />
           </div>
           <div className="mt-12 flex flex-col items-center">
             <h1 className="text-2xl xl:text-3xl font-extrabold">Sign In</h1>

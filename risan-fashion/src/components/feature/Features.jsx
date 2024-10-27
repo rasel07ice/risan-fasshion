@@ -4,7 +4,7 @@ import { Ri24HoursLine } from "react-icons/ri";
 
 const Features = () => {
   return (
-    <div>
+    <div className="my-8">
       <div className="px-10 flex items-center justify-center gap-6">
         <div className="flex border border-primary rounded-sm px-16 py-8 gap-3">
           <FiTruck className="text-5xl text-primary" />

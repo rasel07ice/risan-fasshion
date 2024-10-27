@@ -1,9 +1,10 @@
 import { useAuth } from "@/context/AuthProvider";
+import axiosInstance from "@/services/api";
 import { useForm } from "react-hook-form";
 import { FaUser } from "react-icons/fa";
 import { FaPhoneFlip } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const Register = () => {
@@ -13,24 +14,59 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser } = useAuth();
+  const navigate = useNavigate();
+  const imageHostKey = "56ee418a5ebf12871c85f1cf09692847";
 
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        updateUserProfile(data.fullName, data.phone).then(() => {
-          console.log("profile updated successfully");
-        });
-        toast.success("Registration Status", {
-          description: "Registration Successfull",
-          action: {
-            label: "Close",
-            onClick: () => console.log("Undo"),
-          },
-        });
-        Navigate("/login");
+        console.log(user);
+        console.log(user.uid);
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append("image", image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+        fetch(url, {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((imgData) => {
+            if (imgData.success) {
+              console.log(imgData);
+              const newUser = {
+                firebaseUid: user.uid,
+                name: data.fullName,
+                email: data.email,
+                password: data.password,
+                photoUrl: imgData.data.url,
+                phone: data.phone,
+              };
+              axiosInstance.post("/users", newUser).then((res) => {
+                if (res.data.status === "success") {
+                  toast.success("Registration Status", {
+                    description: ` ${res.data.message}`,
+                    action: {
+                      label: "Close",
+                      onClick: () => console.log("Undo"),
+                    },
+                  });
+                  navigate("/login");
+                } else {
+                  toast.error("Registration Status", {
+                    description: ` ${res.data.message}`,
+                    action: {
+                      label: "Close",
+                      onClick: () => console.log("Undo"),
+                    },
+                  });
+                }
+              });
+            }
+          });
       })
       .catch((error) => {
         toast.error("Registration Status", {
@@ -144,6 +180,34 @@ const Register = () => {
                   />
                 </div>
                 {errors.phone?.type === "required" && (
+                  <p
+                    role="alert"
+                    className="text-left text-primary text-sm italic"
+                  >
+                    * phone is required
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <label className="block text-left text-sm font-medium leading-5 text-gray-700">
+                Phone
+              </label>
+              <div>
+                <div className="mt-1 flex items-center rounded-md shadow-sm">
+                  <span className="inline-flex h-10 items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-secondary text-primary-foreground sm:text-sm">
+                    Photo
+                  </span>
+                  <input
+                    type="file"
+                    {...register("image", {
+                      required: "Photo is Required",
+                    })}
+                    className="flex-1 p-1  border border-gray-300 form-input pl-3 block w-full rounded-none rounded-r-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out  sm:text-sm sm:leading-5"
+                  />
+                </div>
+                {errors.image?.type === "required" && (
                   <p
                     role="alert"
                     className="text-left text-primary text-sm italic"

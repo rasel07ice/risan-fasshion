@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 import "./App.css";
+import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import UpperNavber from "./components/header/UpperNavber";
 
@@ -11,6 +12,7 @@ function App() {
         <UpperNavber />
         <Navbar />
         <Outlet />
+        <Footer />
         <Toaster
           toastOptions={{
             duration: 50000,

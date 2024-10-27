@@ -1,7 +1,6 @@
-import Register from "@/components/authentication/Register";
 import Banner from "@/components/banner/Banner";
 import ShopByCategory from "@/components/category/ShopByCategory";
-import AddProduct from "@/components/dashboard/AddProduct";
+import ContactUs from "@/components/contactUs/ContactUs";
 import Features from "@/components/feature/Features";
 
 import TopSeller from "@/components/products/TopSeller";
@@ -13,8 +12,7 @@ const Home = () => {
       <Features />
       <ShopByCategory />
       <TopSeller />
-      <Register />
-      <AddProduct />
+      <ContactUs />
     </>
   );
 };

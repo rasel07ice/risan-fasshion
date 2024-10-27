@@ -21,11 +21,15 @@ const Navbar = () => {
   //     "https://yt3.ggpht.com/yti/ANjgQV-SzNXqRTJKqehLjTkt3oG1KCsyJiLWjNTGSJ4EADdRcA=s88-c-k-c0x00ffffff-no-rj",
   // };
 
-  const currentUser = null;
-
   const handleSignOut = () => {
     userLogOut().then(() => {
-      toast("User log out successfully");
+      toast.success("log out Status", {
+        description: `User log out successfully `,
+        action: {
+          label: "Close",
+          onClick: () => console.log("Undo"),
+        },
+      });
       navigate("/");
     });
   };
@@ -66,11 +70,9 @@ const Navbar = () => {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/">Courses</Link>
+                <Link to="/">Products</Link>
               </li>
-              <li>
-                <Link to="/aboutus">About Us</Link>
-              </li>
+
               <li>
                 <Link to="/contactus">Contact Us</Link>
               </li>
@@ -104,25 +106,15 @@ const Navbar = () => {
             </li>
             <li id="idCourses">
               <NavLink
-                to="/Courses"
+                to="/products"
                 className={({ isActive }) =>
                   isActive ? "active" : "hover:bg-primary"
                 }
               >
-                Courses
+                Products
               </NavLink>
             </li>
 
-            <li id="idAbout">
-              <NavLink
-                to="/aboutus"
-                className={({ isActive }) =>
-                  isActive ? "active" : "hover:bg-primary"
-                }
-              >
-                About Us
-              </NavLink>
-            </li>
             <li id="idContact">
               <NavLink
                 to="/contactus"
@@ -164,12 +156,12 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          {currentUser ? (
+          {user ? (
             <div className="flex flex-row items-center gap-2">
               <div className="flex flex-col -space-y-2">
                 <span className="text-primary text-sm">Hi!</span>
                 <span className="text-lg font-semibold text-secondary">
-                  {currentUser?.displayName}
+                  {user?.displayName}
                 </span>
               </div>
               <div className="dropdown dropdown-end">
@@ -181,7 +173,7 @@ const Navbar = () => {
                   <div className="w-10 rounded-full">
                     <img
                       alt="Tailwind CSS Navbar component"
-                      src={currentUser?.photoURL}
+                      src={user?.photoURL}
                     />
                   </div>
                 </div>

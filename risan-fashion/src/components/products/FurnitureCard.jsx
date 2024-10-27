@@ -9,7 +9,7 @@ const FurnitureCard = ({ furniture }) => {
     dispatch(addToCart(item.furniture));
   };
   return (
-    <div className="p-1 ">
+    <div className="">
       <div className="h-full rounded-sm shadow-cla-pink bg-gradient-to-r from-fuchsia-50 to-pink-50 overflow-hidden">
         <img
           className="lg:h-48 md:h-36 w-full object-cover scale-110 transition-all duration-400 hover:scale-100"

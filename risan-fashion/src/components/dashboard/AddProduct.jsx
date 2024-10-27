@@ -43,7 +43,6 @@ const AddProduct = () => {
 
   const handleAddProduct = (data) => {
     setIsSubmitting(true);
-    console.log("isSubmitting: ", isSubmitting);
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);

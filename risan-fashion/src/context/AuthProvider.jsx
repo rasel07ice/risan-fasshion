@@ -9,15 +9,20 @@ import {
 } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import app from "./firebaseInit";
+import axiosInstance from "@/services/api";
 
 const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const sayHello = () => {
+    console.log("hello!");
   };
 
   const signIn = (email, password) => {
@@ -40,12 +45,22 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  const register = () => {};
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("current user:", currentUser);
-      setUser(currentUser);
+      if (currentUser) {
+        axiosInstance.get(`users/user/${currentUser?.email}`).then((res) => {
+          const retriveduser = res.data.user;
+          console.log("retrived:", retriveduser);
+          setUser(retriveduser);
+        });
+      }
     });
     return () => {
       unsubscribe();
@@ -56,6 +71,7 @@ const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        sayHello,
         createUser,
         loginWithGmail,
         signIn,

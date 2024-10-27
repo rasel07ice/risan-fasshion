@@ -25,7 +25,7 @@ export function CarouselPlugin() {
         <CarouselItem>
           <div className="">
             <Card className="relative border-none">
-              <CardContent className="flex items-center justify-center p-1 ">
+              <CardContent className="flex items-center justify-center p-0">
                 <img src="./banner_drawing_1.jpg" alt="carousel one" />
               </CardContent>
               <div className="container absolute top-1/4 md:top-1/3 left-0 space-y-3 max-w-2xl text-left">
@@ -46,7 +46,7 @@ export function CarouselPlugin() {
         <CarouselItem>
           <div className="">
             <Card className="relative border-none">
-              <CardContent className="flex items-center justify-center p-1 ">
+              <CardContent className="flex items-center justify-center p-0">
                 <img src="./banner_drawing_2.jpg" alt="carousel one" />
               </CardContent>
               <div className="container absolute top-1/4 md:top-1/3 left-0 space-y-3 max-w-2xl text-left">
@@ -67,7 +67,7 @@ export function CarouselPlugin() {
         <CarouselItem>
           <div className="">
             <Card className="relative border-none">
-              <CardContent className="flex items-center justify-center p-1 ">
+              <CardContent className="flex items-center justify-center p-0">
                 <img src="./banner_drawing_3.jpg" alt="carousel one" />
               </CardContent>
               <div className="container absolute top-1/4 md:top-1/3 left-0 space-y-3 max-w-2xl text-left">

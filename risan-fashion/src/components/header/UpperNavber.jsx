@@ -10,7 +10,7 @@ const UpperNavber = () => {
     <div className="container flex flex-row items-center pb-4 justify-between text-black">
       <div>
         <h2 className="uppercase text-2xl font-semibold">
-          <span className="text-primary">Risan </span>Fashion
+          <span className="text-primary">Risan </span>Mart
         </h2>
       </div>
       <div>
