@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <div className="relative">
+        <h1>Hello world</h1>
         <UpperNavber />
         <Navbar />
         <Outlet />

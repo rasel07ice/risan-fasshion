@@ -32,7 +32,7 @@ const ShopByCategory = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-2 items-center">
-        {categories.map((category, index) => (
+        {categories?.map((category, index) => (
           <CategoryCard key={index} category={category} />
         ))}
       </div>

@@ -7,7 +7,7 @@ import ContactUs from "@/components/contactUs/ContactUs";
 import AddProduct from "@/components/dashboard/AddProduct";
 import EditProduct from "@/components/dashboard/EditProduct";
 import Users from "@/components/dashboard/Users";
-import CartPage from "@/components/products/CartPage";
+
 import ProductsTable from "@/components/products/ProductsTable";
 import SingleFurniture from "@/components/products/SingleFurniture";
 import DashboardPage from "@/pages/dashboard/DashboardPage";
@@ -36,12 +36,9 @@ const router = createBrowserRouter([
         path: "/contactus",
         element: <ContactUs />,
       },
+
       {
-        path: "/cart",
-        element: <CartPage />,
-      },
-      {
-        path: "products/:id",
+        path: "/products/:id",
         element: <SingleFurniture />,
       },
       {
