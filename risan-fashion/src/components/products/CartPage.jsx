@@ -90,6 +90,7 @@ const CartPage = () => {
           </tr>
         </tfoot>
       </table>
+<<<<<<< HEAD
       <div className="flex justify-end">
         <button
           className="px-3 py-2 bg-secondary rounded-md text-white"
@@ -151,6 +152,8 @@ const CartPage = () => {
           </div>
         </div>
       </dialog>
+=======
+>>>>>>> parent of f912efe (last commit)
     </div>
   );
 };

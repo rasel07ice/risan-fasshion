@@ -28,7 +28,7 @@ const Furniture = ({ categoryName }) => {
       if (allFurnitures.products) setFurnitures(allFurnitures.products);
     };
     getAllFurnitures();
-  }, [furnitures]);
+  }, []);
   console.log(furnitures);
   return (
     <div className="container mt-6">
@@ -39,7 +39,7 @@ const Furniture = ({ categoryName }) => {
         </span>
       </div>
       <div>
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-2">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-2 ">
           {furnitures?.map((item) => (
             <FurnitureCard key={item._id} furniture={item} />
           ))}
