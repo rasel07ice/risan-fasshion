@@ -1,10 +1,12 @@
 import { useAuth } from "@/context/AuthProvider";
 import { FaUser } from "react-icons/fa";
 import { MdSystemSecurityUpdateGood } from "react-icons/md";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 
 const DashboardPage = () => {
   const { user } = useAuth();
+
+  if (!user) return <Navigate to="/login" />;
 
   // } return <Navigate to="/login" />;
   return (
@@ -12,7 +14,11 @@ const DashboardPage = () => {
       <div className="grid grid-cols-1 justify-center md:grid-cols-5">
         <div className="col-span-1">
           <div className="flex flex-col items-center">
-            <img className="size-24" src={user?.photoUrl} alt="image" />
+            <img
+              className="size-24 rounded-full"
+              src={user?.photoUrl}
+              alt="image"
+            />
             <p className="text-sm">Faiya Karim Sarkar Risan</p>
             <p className="text-sm">
               <span>Email:</span>risan@gmail.com

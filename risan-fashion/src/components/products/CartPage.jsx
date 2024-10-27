@@ -1,14 +1,28 @@
+import { useAuth } from "@/context/AuthProvider";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const CartPage = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalPrice = cartItems.reduce((accumulator, item) => {
     return (accumulator += item.newPrice);
   }, 0);
-  console.log(totalPrice);
+
+  const handlePurchase = () => {
+    toast.success("Product Status", {
+      description: ` Your order is submitted! check your email for details`,
+      action: {
+        label: "Close",
+        onClick: () => console.log("Undo"),
+      },
+    });
+    navigate("/products");
+  };
   const handleDelete = () => {
-    console.log();
+    console.log("deleted");
   };
 
   return (
@@ -76,9 +90,9 @@ const CartPage = () => {
           </tr>
         </tfoot>
       </table>
-      <div>
+      <div className="flex justify-end">
         <button
-          className="px-3 py-2 bg-primary"
+          className="px-3 py-2 bg-secondary rounded-md text-white"
           type="button"
           onClick={() => document.getElementById("order_modal").showModal()}
         >
@@ -95,36 +109,45 @@ const CartPage = () => {
             </button>
           </form>
           <div className="p-4">
-          <table className="table">
-        {/* head */}
-        <thead>
-          <tr>
-            <th>
-              <label>
-                <input type="checkbox" className="checkbox" />
-              </label>
-            </th>
-            <th>Customer Name</th>
-            <th>Email</th>
-            <th>Number of Products</th>
-            <th>Total Price</th>
-            <th>Adress</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          {/* row 1 */}
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>Customer Name</th>
+                  <th>Email</th>
+                  <th>Number of Products</th>
+                  <th>Total Price</th>
+                  <th>Adress</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 1 */}
 
-            <tr >
-              <td>
-              </td>
-              <td>{item?.category}</td>
-              <td>{item?.newPrice}</td>
-            </tr>
-
-        </tbody>
-
-      </table>
+                <tr>
+                  <td>{user?.name}</td>
+                  <td>{user?.email}</td>
+                  <td>{cartItems.length}</td>
+                  <td>{totalPrice}</td>
+                  <td>
+                    <input
+                      type="text"
+                      name="address"
+                      placeholder="enter address"
+                      id="address"
+                    />
+                  </td>
+                  <th className="space-x-1">
+                    <Link
+                      className="btn btn-ghost btn-xs bg-primary"
+                      onClick={handlePurchase}
+                    >
+                      Purchase
+                    </Link>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </dialog>
